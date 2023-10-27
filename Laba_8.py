@@ -19,26 +19,22 @@ class Password:
 
 def button():
     p = Password()
-    k = 0
     passwords = []
     count = int(entr.get())
     for i in range(count):
         p.gen_pas()
-        k += 1
         passwords.append(p.get_pas())
-
-    windowAnswer = Tk()
-    windowAnswer.title('Answer')
-    txt_answ = Text(windowAnswer, width=100, height=50)
-    scrolmat = Scrollbar(windowAnswer, orient="vertical", command=txt_answ.yview)
+    txt_answ = Text(windowEntry, width=50, height=50)
+    scrolmat = Scrollbar(windowEntry, orient="vertical", command=txt_answ.yview)
+    if count == 0:
+        txt_answ.insert(END, 'тут ничего нету.\nпотому что вы \nввели ноль')
     for i in range(len(passwords)):
-        txt_answ.insert(END, [passwords[i], '№', i + 1])
+        txt_answ.insert(END, [passwords[i], '№', i+1])
         txt_answ.insert(END, '\n')
-    scrolmat.place(x=781, y=0, height=800)
-    txt_answ.grid()
+    scrolmat.place(x=485, y=0, height=200)
+    txt_answ.place(x=360, y=0, height=200)
     txt_answ["yscrollcommand"] = scrolmat.set
-    windowAnswer.geometry('800x800')
-    windowAnswer.mainloop()
+
 
 
 windowEntry = Tk()
@@ -53,5 +49,6 @@ entr.place(x=120, y=50)
 button.place(x=120, y=100)
 
 entr.focus()
-windowEntry.geometry('360x200')
+windowEntry.eval('tk::PlaceWindow . center')
+windowEntry.geometry('500x200')
 windowEntry.mainloop()
