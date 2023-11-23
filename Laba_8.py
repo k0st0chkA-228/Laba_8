@@ -1,6 +1,7 @@
 import random
 import string
 from tkinter import *
+from tkinter import Label
 
 
 class Password:
@@ -21,34 +22,41 @@ def button():
     p = Password()
     passwords = []
     count = int(entr.get())
+    txt_answ = Text(windowEntry, width=65, height=50)
+    scrolmat = Scrollbar(windowEntry, orient="vertical", command=txt_answ.yview)
+    if count < 0:
+        txt_answ.insert(END, 'Введено отрицательное\nчисло. Для работы\nпрограммы был взят\nмодуль числа\n\n')
+        count = abs(count)
     for i in range(count):
         p.gen_pas()
         passwords.append(p.get_pas())
-    txt_answ = Text(windowEntry, width=50, height=50)
-    scrolmat = Scrollbar(windowEntry, orient="vertical", command=txt_answ.yview)
-    if count == 0:
-        txt_answ.insert(END, 'тут ничего нету.\nпотому что вы \nввели ноль')
     for i in range(len(passwords)):
         txt_answ.insert(END, [passwords[i], '№', i+1])
         txt_answ.insert(END, '\n')
-    scrolmat.place(x=485, y=0, height=200)
-    txt_answ.place(x=360, y=0, height=200)
+    scrolmat.place(x=495, y=0, height=200)
+    txt_answ.place(x=320, y=0, height=200)
     txt_answ["yscrollcommand"] = scrolmat.set
+    if count != 0:
+        lbl1.config(text='Программа вывела пароли. Если хотети другие\n варианты паролей, нажмите на кропку '
+                         '"ПРОДОЛЖИТЬ"\n\nДля выхода из программы нажмите крестик')
 
+    else:
+        txt_answ.insert(END, 'тут ничего нету.\nпотому что вы \nввели ноль')
+        lbl1.config(text='Вы ввели ноль.\nПрограмма не вывела ниодного пароля.\nДля работы программы нужно ввести число'
+                         '.\nДля выхода из программы нажмите крестик.')
 
 
 windowEntry = Tk()
 windowEntry.title('Lab 8')
 
-button = Button(windowEntry, text='Продолжить', command=button)
-entr = Entry(windowEntry, width=10)
-lbl = Label(windowEntry, width=45, text='какое количество паролей нужно вывести?')
-
-lbl.place(x=1, y=15)
-entr.place(x=120, y=50)
-button.place(x=120, y=100)
+button1 = Button(windowEntry, text='Продолжить', command=button)
+entr = Entry(windowEntry, width=30)
+lbl1 = Label(windowEntry, width=45, text='какое количество паролей нужно вывести?')
+lbl1.place(x=1, y=30)
+entr.place(x=75, y=105)
+button1.place(x=115, y=140)
 
 entr.focus()
 windowEntry.eval('tk::PlaceWindow . center')
-windowEntry.geometry('500x200')
+windowEntry.geometry('510x200')
 windowEntry.mainloop()
