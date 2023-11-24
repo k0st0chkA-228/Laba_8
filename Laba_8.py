@@ -21,8 +21,15 @@ class Password:
 def button():
     p = Password()
     passwords = []
-    count = int(entr.get())
     txt_answ = Text(windowEntry, width=65, height=50)
+    try:
+        B = int(entr.get())
+    except ValueError:
+        txt_answ.place(x=320, y=0, height=200)
+        txt_answ.insert("1.0", "Вы ввели не число")
+        return
+    count = int(entr.get())
+
     scrolmat = Scrollbar(windowEntry, orient="vertical", command=txt_answ.yview)
     if count < 0:
         txt_answ.insert(END, 'Введено отрицательное\nчисло. Для работы\nпрограммы был взят\nмодуль числа\n\n')
