@@ -26,7 +26,7 @@ def button():
         B = int(entr.get())
     except ValueError:
         txt_answ.place(x=320, y=0, height=200)
-        txt_answ.insert("1.0", "Вы ввели не число")
+        txt_answ.insert("1.0", "Вы ввели не число\nВведите число для\nработы программы")
         return
     count = int(entr.get())
 
